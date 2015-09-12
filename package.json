@@ -1,0 +1,24 @@
+{
+  "name": "ast-types-flow",
+  "version": "0.0.0",
+  "description": "Flow types for Javascript AST",
+  "main": "src/ASTNode.js",
+  "scripts": {
+    "test": "flow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyldvs/ast-types-flow.git"
+  },
+  "keywords": [
+    "flow",
+    "ast",
+    "javascript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyldvs/ast-types-flow/issues"
+  },
+  "homepage": "https://github.com/kyldvs/ast-types-flow#readme"
+}
