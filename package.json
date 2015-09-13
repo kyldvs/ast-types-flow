@@ -2,8 +2,9 @@
   "name": "ast-types-flow",
   "version": "0.0.0",
   "description": "Flow types for Javascript AST",
-  "main": "src/ASTNode.js",
+  "main": "lib/types.js",
   "scripts": {
+    "build": "gulp build",
     "test": "flow"
   },
   "repository": {
@@ -20,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/kyldvs/ast-types-flow/issues"
   },
-  "homepage": "https://github.com/kyldvs/ast-types-flow#readme"
+  "homepage": "https://github.com/kyldvs/ast-types-flow#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.6",
+    "jscodeshift": "^0.3.7",
+    "nuclide-node-transpiler": "0.0.30",
+    "through2": "^2.0.0"
+  }
 }

@@ -1,3 +1,6 @@
+[ignore]
+.*/node_modules/nuclide-node-transpiler/.*
+
 [options]
 module.system=haste
 suppress_type=$ExpectError
