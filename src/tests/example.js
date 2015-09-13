@@ -4,24 +4,30 @@
 
 'use strict';
 
-import type {ASTNode} from '../ASTNode';
+import type {Node, Program} from '../ASTNode';
 
+/**
+ * Make sure expect error works.
+ */
 function shouldExpectErrors() {
   // $ExpectError
   Math.max('one', 'two');
 }
 
-function shouldCheckSomething(node: ASTNode): string {
+/**
+ * Making sure we can do basic refinements based on type.
+ */
+function shouldCheckSomething(node: Node): Program {
   switch (node.type) {
-    case 'Bar':
-      return node.bar;
-
-    case 'Baz':
+    case 'Program':
       // $ExpectError
-      return node.bar;
+      return node.notANode;
+
+    case 'File':
+      return node.program;
 
     default:
-      // TODO: ExpectError
+      // TODO: $ExpectError
       return node.wat;
   }
 }

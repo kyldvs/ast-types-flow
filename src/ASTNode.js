@@ -4,12 +4,16 @@
 
 'use strict';
 
-export type ASTNode =
-  {
-    type: 'Bar',
-    bar: string,
-  } |
-  {
-    type: 'Baz',
-    baz: string,
-  };
+export type Program = {
+  type: 'Program',
+  body: Array<Node>,
+};
+
+export type File = {
+  type: 'File',
+  program: Program,
+};
+
+export type Node =
+  File |
+  Program;
