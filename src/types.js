@@ -475,6 +475,13 @@ export type AssignmentPattern = {
 };
 
 // --es6
+type ClassBodyElement
+  = MethodDefinition
+  | VariableDeclarator
+  | ClassPropertyDefinition
+  | ClassProperty;
+
+// --es6
 export type ClassProperty = {
   // extends Declaration
   key: Literal | Identifier | Expression,
@@ -485,23 +492,13 @@ export type ClassProperty = {
 // --es6
 export type ClassPropertyDefinition = {
   // extends Declaration
-  definition:
-    MethodDefinition |
-    VariableDeclarator |
-    ClassPropertyDefinition |
-    ClassProperty,
+  definition: ClassBodyElement,
 };
 
 // --es6
 export type ClassBody = {
   // extends Declaration
-  body:
-    Array<
-      MethodDefinition |
-      VariableDeclarator |
-      ClassPropertyDefinition |
-      ClassProperty
-    >,
+  body: Array<ClassBodyElement>,
 };
 
 // --es6
@@ -518,8 +515,8 @@ export type ClassExpression = {
   id: ?Identifier,
   body: ClassBody,
   superClass: ?Expression,
-  // TODO: Flow bug, and a supression won't fix it.
-  // implements: Array<ClassImplements>,
+  // TODO: Recast parse error.
+  // 'implements': Array<ClassImplements>,
 };
 
 // --es6
@@ -578,4 +575,95 @@ export type AwaitExpression = {
   // extends Expression
   argument: ?Expression,
   all: boolean,
+};
+
+// --jsx
+export type JSXAttribute = {
+  // extends Node
+  name: JSXIdentifier | JSXNamespacedName,
+  value: Literal | JSXExpressionContainer | ?void,
+};
+
+// --jsx
+export type JSXSpreadAttribute = {
+  // extends Node
+  argument: Expression,
+};
+
+// --jsx
+export type JSXIdentifier = {
+  // extends Node
+  // TODO: Is extending Identifier okay?
+  name: string,
+};
+
+// --jsx
+export type JSXNamespacedName = {
+  // extends Node
+  namespace: JSXIdentifier,
+  name: JSXIdentifier,
+};
+
+// --jsx
+export type JSXMemberExpression = {
+  // extends Expression
+  // TODO: Is extending MemberExpression okay?
+  object: JSXIdentifier | JSXMemberExpression,
+  property: JSXIdentifier,
+  computed: boolean,
+};
+
+// --jsx
+export type JSXExpressionContainer = {
+  // extends Expression
+  expression: Expression,
+};
+
+// --jsx
+type JSXElementName = JSXIdentifier | JSXNamespacedName | JSXMemberExpression;
+
+// --jsx
+type JSXAttributes = Array<JSXAttribute | JSXSpreadAttribute>;
+
+// --jsx
+export type JSXElement = {
+  // extends Expression
+  openingElement: JSXOpeningElement,
+  closingElement: ?JSXClosingElement,
+  children:
+    Array<
+      JSXElement |
+      JSXExpressionContainer |
+      JSXText |
+      Literal
+    >,
+  name: JSXElementName,
+  selfClosing: boolean,
+  attributes: JSXAttributes,
+};
+
+// --jsx
+export type JSXOpeningElement = {
+  // extends Node
+  name: JSXElementName,
+  attributes: JSXAttributes,
+  selfClosing: boolean,
+};
+
+// --jsx
+export type JSXClosingElement = {
+  // extends Node
+  name: JSXElementName,
+};
+
+// --jsx
+export type JSXText = {
+  // extends Node, Expression
+  // TODO: Is extending literal okay?
+  value: string,
+};
+
+// --jsx
+export type JSXEmptyExpression = {
+  // extends Expression
 };

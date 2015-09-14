@@ -11,25 +11,33 @@ function transform(source) {
   const types = new Map();
   const props = new Map();
   root
-    .find(j.TypeAlias, {id: {type: 'Identifier'}})
+    .find(
+      j.TypeAlias,
+      {
+        id: {type: 'Identifier'},
+        right: {type: 'ObjectTypeAnnotation'}
+      }
+    )
     .forEach(p => {
       const n = p.node;
       const type = n.id.name;
       types.set(type, new Set());
       props.set(type, []);
       const comments = [];
-      if (n.right.type === 'ObjectTypeAnnotation') {
-        Array.prototype.push.apply(comments, n.right.comments || []);
-        n.right.properties.forEach(property => {
-          Array.prototype.push.apply(comments, property.comments || []);
-          // Re-create the property.
-          props.get(type).push(j.objectTypeProperty(
-            j.identifier(property.key.name),
-            property.value, // TODO: Re-create this better.
-            !!property.optional
-          ));
-        });
-      }
+
+      // We know right is an ObjectTypeAnnotation.
+      Array.prototype.push.apply(comments, n.right.comments || []);
+      n.right.properties.forEach(property => {
+        Array.prototype.push.apply(comments, property.comments || []);
+        // Re-create the property.
+        props.get(type).push(j.objectTypeProperty(
+          j.identifier(property.key.name),
+          property.value, // TODO: Re-create this better.
+          !!property.optional
+        ));
+      });
+
+      // Then parse each comment to see what this extends.
       comments.forEach(comment => {
         const value = comment.value;
         if (/extends (\w+, )*\w+$/.test(value)) {
@@ -97,7 +105,13 @@ function transform(source) {
   // Replace every type with its concrete props.
 
   root
-    .find(j.TypeAlias, {id: {type: 'Identifier'}})
+    .find(
+      j.TypeAlias,
+      {
+        id: {type: 'Identifier'},
+        right: {type: 'ObjectTypeAnnotation'}
+      }
+    )
     .forEach(p => {
       const n = p.node;
       const name = n.id.name;
@@ -155,7 +169,7 @@ function transform(source) {
       p.replace(n);
     });
 
-  return root.toSource();
+  return root.toSource({quote: 'single'});
 }
 
 module.exports = transform;
