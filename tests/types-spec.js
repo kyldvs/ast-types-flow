@@ -45,13 +45,15 @@ function getName(node: Node): string {
       // $ExpectError
       return node.id.name; // Error, id could be null.
 
+    case 'FunctionDeclaration':
+      return node.id.name; // Fine if it's always there.
+
     case 'FunctionExpression':
       if (node.id) {
-        return node.id.name; // Can refine id to make sure it exists though.
+        return node.id.name; // Can refine id to make sure it exists.
+      } else {
+        return 'Unknown';
       }
-
-    case 'FunctionDeclaration':
-      return node.id.name; // No need to refine if it's always there.
 
     case 'Literal':
       // $ExpectError
