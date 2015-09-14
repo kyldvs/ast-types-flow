@@ -1,7 +1,7 @@
 {
   "name": "ast-types-flow",
-  "version": "0.0.0",
-  "description": "Flow types for Javascript AST",
+  "version": "0.0.1",
+  "description": "Flow types for the Javascript AST",
   "main": "lib/types.js",
   "scripts": {
     "build": "gulp build",
@@ -16,7 +16,7 @@
     "ast",
     "javascript"
   ],
-  "author": "",
+  "author": "kyldvs",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kyldvs/ast-types-flow/issues"
