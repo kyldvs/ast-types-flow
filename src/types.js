@@ -55,6 +55,10 @@ export type Function = {
 
   // --es7
   async: boolean,
+
+  // --flow
+  returnType: ?TypeAnnotation,
+  typeParameters: ?TypeParameterDeclaration,
 };
 
 export type Declaration = {
@@ -432,6 +436,9 @@ export type SwitchCase = {
 export type Identifier = {
   // extends Node, Expression, Pattern
   name: string,
+
+  // --flow
+  typeAnnotation: TypeAnnotation,
 };
 
 export type Literal = {
@@ -486,6 +493,11 @@ export type ClassProperty = {
   // extends Declaration
   key: Literal | Identifier | Expression,
   computed: boolean,
+
+  // --flow
+  value: ?Expression,
+  typeAnnotation: ?TypeAnnotation,
+  static: boolean,
 };
 
 // Static property
@@ -524,6 +536,9 @@ export type ClassImplements = {
   // extends Node
   id: Identifier,
   superClass: ?Expression,
+
+  // --flow
+  typeParameters: ?TypeParameterInstantiation,
 };
 
 // --es6
@@ -666,4 +681,238 @@ export type JSXText = {
 // --jsx
 export type JSXEmptyExpression = {
   // extends Expression
+};
+
+// --flow
+export type Type = {
+  // extends Node
+};
+
+// --flow
+export type AnyTypeAnnotation = {
+  // extends Type
+};
+
+// --flow
+export type MixedTypeAnnotation = {
+  // extends Type
+};
+
+// --flow
+export type VoidTypeAnnotation = {
+  // extends Type
+};
+
+// --flow
+export type NumberTypeAnnotation = {
+  // extends Type
+};
+
+// --flow
+export type NumberLiteralTypeAnnotation = {
+  // extends Type
+  value: number,
+  raw: string,
+};
+
+// --flow
+export type StringTypeAnnotation = {
+  // extends Type
+};
+
+// --flow
+export type StringLiteralTypeAnnotation = {
+  // extends Type
+  value: string,
+  raw: string,
+};
+
+// --flow
+export type BooleanTypeAnnotation = {
+  // extends Type
+};
+
+// --flow
+export type BooleanLiteralTypeAnnotation = {
+  // extends Type
+  value: boolean,
+  raw: string,
+};
+
+// --flow
+export type TypeAnnotation = {
+  // extends Node
+  typeAnnotation: Type,
+};
+
+// --flow
+export type NullableTypeAnnotation = {
+  // extends Type
+  // TODO: Should this extend Node?
+  typeAnnotation: Type,
+};
+
+// --flow
+export type FunctionTypeAnnotation = {
+  // extends Type
+  params: Array<FunctionTypeParam>,
+  returnType: Type,
+  rest: ?FunctionTypeParam,
+  typeParameters: ?TypeParameterDeclaration,
+};
+
+// --flow
+export type FunctionTypeParam = {
+  // extends Node
+  name: Identifier,
+  typeAnnotation: Type,
+  optional: boolean,
+};
+
+// --flow
+export type ArrayTypeAnnotation = {
+  // extends Type
+  elementType: Type,
+};
+
+// --flow
+export type ObjectTypeAnnotation = {
+  // extends Type
+  properties: Array<ObjectTypeProperty>,
+  indexers: Array<ObjectTypeIndexer>,
+  callProperties: Array<ObjectTypeCallProperty>,
+};
+
+// --flow
+export type ObjectTypeProperty = {
+  // extends Node
+  key: Literal | Identifier,
+  value: Type,
+  optional: boolean,
+};
+
+// --flow
+export type ObjectTypeIndexer = {
+  // extends Node
+  id: Identifier,
+  key: Type,
+  value: Type,
+};
+
+// --flow
+export type ObjectTypeCallProperty = {
+  // extends Node
+  value: FunctionTypeAnnotation,
+  static: boolean,
+};
+
+// --flow
+export type QualifiedTypeIdentifier = {
+  // extends Node
+  qualification: Identifier | QualifiedTypeIdentifier,
+  id: Identifier,
+};
+
+// --flow
+export type GenericTypeAnnotation = {
+  // extends Type
+  id: Identifier | QualifiedTypeIdentifier,
+  typeParameters: ?TypeParameterInstantiation,
+};
+
+// --flow
+export type MemberTypeAnnotation = {
+  // extends Type
+  object: Identifier,
+  property: MemberTypeAnnotation | GenericTypeAnnotation,
+};
+
+// --flow
+export type UnionTypeAnnotation = {
+  // extends Type
+  types: Array<Type>,
+};
+
+// --flow
+export type IntersectionTypeAnnotation = {
+  // extends Type
+  types: Array<Type>,
+};
+
+// --flow
+export type TypeofTypeAnnotation = {
+  // extends Type
+  argument: Type,
+};
+
+// --flow
+export type TypeParameterDeclaration = {
+  // extends Node
+  params: Array<Identifier>,
+};
+
+// --flow
+export type TypeParameterInstantiation = {
+  // extends Node
+  params: Array<Type>,
+};
+
+// --flow
+export type InterfaceDeclaration = {
+  // extends Statement
+  id: Identifier,
+  typeParameters: ?TypeParameterDeclaration,
+  body: ObjectTypeAnnotation,
+  extends: Array<InterfaceExtends>,
+};
+
+// --flow
+export type InterfaceExtends = {
+  // extends Node
+  id: Identifier,
+  typeParameters: ?TypeParameterInstantiation,
+};
+
+// --flow
+export type TypeAlias = {
+  // extends Statement
+  id: Identifier,
+  typeParameters: ?TypeParameterDeclaration,
+  right: Type,
+};
+
+// --flow
+export type TypeCaseExpression = {
+  // extends Expression
+  expression: Expression,
+  typeAnnotation: TypeAnnotation,
+};
+
+// --flow
+export type TupleTypeAnnotation = {
+  // extends Type
+  types: Array<Type>,
+};
+
+// --flow
+export type DeclareVariable = {
+  // extends Statement
+  id: Identifier,
+};
+
+// --flow
+export type DeclareClass = {
+  // extends Statement
+  // TODO: Is it okay to extend InterfaceDeclaration?
+  id: Identifier,
+  typeParameters: ?TypeParameterDeclaration,
+  body: ObjectTypeAnnotation,
+  extends: Array<InterfaceExtends>,
+};
+
+// --flow
+export type DeclareModule = {
+  // extends Statement
+  id: Identifier | Literal,
+  body: BlockStatement,
 };
