@@ -23,6 +23,16 @@ export type Block = {
   // extends Comment
 };
 
+// --babel
+export type CommentLine = {
+  // extends Comment
+};
+
+// --babel
+export type CommentBlock = {
+  // extends Comment
+};
+
 // Base types.
 
 export type Node = {
