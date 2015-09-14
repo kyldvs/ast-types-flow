@@ -52,6 +52,9 @@ export type Function = {
   expression: boolean,
   defaults: Array<Expression | ?void>,
   rest: ?Identifier,
+
+  // --es7
+  async: boolean,
 };
 
 export type Declaration = {
@@ -238,7 +241,10 @@ export type ArrayExpression = {
 
 export type ObjectExpression = {
   // extends Expression
-  properties: Array<Property>,
+  // properties: Array<Property>, TODO: Better overriding support.
+
+  // --es7
+  properties: Array<Property | SpreadProperty>,
 };
 
 export type Property = {
@@ -266,7 +272,12 @@ export type PropertyPattern = {
 // --es6
 export type ObjectPattern = {
   // extends Pattern
-  properties: Array<PropertyPattern | Property>,
+
+  // TODO: Better overriding support.
+  // properties: Array<PropertyPattern | Property>,
+
+  // --es7
+  properties: Array<PropertyPattern | Property | SpreadProperty>,
 };
 
 // --es6
@@ -548,4 +559,23 @@ export type TemplateElement = {
     raw: string,
   },
   tail: boolean,
+};
+
+// --es7
+export type SpreadProperty = {
+  // extends Node
+  argument: Expression,
+};
+
+// --es7
+export type SpreadPropertyPattern = {
+  // extends Pattern
+  argument: Pattern,
+};
+
+// --es7
+export type AwaitExpression = {
+  // extends Expression
+  argument: ?Expression,
+  all: boolean,
 };
