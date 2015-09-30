@@ -60,7 +60,7 @@ export type Function = {
   // --es6
   generator: boolean,
   expression: boolean,
-  defaults: Array<Expression | ?void>,
+  defaults: Array<?Expression>,
   rest: ?Identifier,
 
   // --es7
@@ -182,7 +182,7 @@ export type DoWhileStatement = {
 
 export type ForStatement = {
   // extends Statement
-  init: VariableDeclaration | Expression | ?void,
+  init: ?(VariableDeclaration | Expression),
   test: ?Expression,
   update: ?Expression,
   body: Statement,
@@ -214,7 +214,7 @@ export type FunctionExpression = {
 // --es6
 export type ArrowFunctionExpression = {
   // extends Function, Expression
-  id: ?void,
+  id: ?Identifier,
   body: BlockStatement | Expression,
   // TODO: generator: false,
 };
@@ -250,7 +250,7 @@ export type ArrayExpression = {
   // elements: Array<?Expression>, // TODO: Better overriding support.
 
   // --es6
-  elements: Array<Expression | SpreadElement | RestElement | ?void>,
+  elements: Array<?(Expression | SpreadElement | RestElement)>,
 };
 
 export type ObjectExpression = {
@@ -297,7 +297,7 @@ export type ObjectPattern = {
 // --es6
 export type ArrayPattern = {
   // extends Pattern
-  elements: Array<Pattern | ?void>,
+  elements: Array<?Pattern>,
 };
 
 export type SequenceExpression = {
@@ -453,7 +453,7 @@ export type Identifier = {
 
 export type Literal = {
   // extends Node, Expression
-  value: string | boolean | ?void | number | RegExp,
+  value: ?(string | boolean | number | RegExp),
   regex: ?{
     pattern: string,
     flags: string,
@@ -606,7 +606,7 @@ export type AwaitExpression = {
 export type JSXAttribute = {
   // extends Node
   name: JSXIdentifier | JSXNamespacedName,
-  value: Literal | JSXExpressionContainer | ?void,
+  value: ?(Literal | JSXExpressionContainer),
 };
 
 // --jsx
