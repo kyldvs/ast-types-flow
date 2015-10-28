@@ -943,3 +943,4 @@ export type ExportNamespaceSpecifier = any;
 export type ExportNamedDeclaration = any;
 export type ExportDefaultSpecifier = any;
 export type ExportDefaultDeclaration = any;
+export type ExportSpecifier = any;

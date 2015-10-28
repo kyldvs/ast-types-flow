@@ -1,6 +1,6 @@
 {
   "name": "ast-types-flow",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Flow types for the Javascript AST",
   "main": "lib/types.js",
   "files": [
