@@ -37,6 +37,9 @@ export type CommentBlock = {
 
 export type Node = {
   comments: ?Array<Comment>,
+  innerComments: ?Array<Comment>,
+  leadingComments: ?Array<Comment>,
+  trailingComments: ?Array<Comment>,
 };
 
 export type Pattern = {
@@ -243,6 +246,10 @@ export type VariableDeclarator = {
 
 export type ThisExpression = {
   // extends Expression
+};
+
+export type Super = {
+  // extends Node
 };
 
 export type ArrayExpression = {
@@ -926,3 +933,13 @@ export type DeclareModule = {
   id: Identifier | Literal,
   body: BlockStatement,
 };
+
+// --todo
+export type ImportSpecifier = any;
+export type ImportNamespaceSpecifier = any;
+export type ImportDefaultSpecifier = any
+export type ImportDeclaration = any;
+export type ExportNamespaceSpecifier = any;
+export type ExportNamedDeclaration = any;
+export type ExportDefaultSpecifier = any;
+export type ExportDefaultDeclaration = any;
