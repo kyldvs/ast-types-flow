@@ -20,7 +20,7 @@
     "javascript"
   ],
   "author": "kyldvs",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kyldvs/ast-types-flow/issues"
   },
